@@ -1,5 +1,5 @@
-import java.util.Collections;
-import java.util.Comparator;
+import java.util.*;
+import java.io.*;
 
 public class DictionaryCommandline {
     DictionaryManagement dictionaryManagement = new DictionaryManagement();
@@ -23,7 +23,47 @@ public class DictionaryCommandline {
     }
 
     public void dictionaryBasic() {
-        dictionaryManagement.insertFromCommandline();
-        showAllWords();
+        Scanner input = new Scanner(System.in);
+        System.out.println("Chọn chức năng:");
+        System.out.println("1. Nhập dữ liệu từ bàn phím");
+        System.out.println("2. Hiển thị tất cả các từ");
+        System.out.println("3. Tìm kiếm từ tiếng Anh");
+        System.out.println("4. Tìm kiếm từ tiếng Việt");
+        System.out.println("5. Thoát chương trình");
+        int choice = input.nextInt();
+        switch (choice) {
+            case 1:
+                dictionaryManagement.insertFromCommandline();
+                break;
+
+            case 2:
+                showAllWords();
+                break;
+
+            case 3:
+                System.out.print("Nhập từ tiếng Anh cần tìm: ");
+                String find_Eword = input.next();
+                dictionaryManagement.searchByEnglish(find_Eword);
+                break;
+
+            case 4:
+                System.out.println("Nhập từ tiếng Việt cần tìm: ");
+                String find_Vmean = input.next();
+                dictionaryManagement.searchByVietnamese(find_Vmean);
+                break;
+
+            case 5:
+                System.out.println("Exit");
+                System.exit(0);
+                break;
+
+            default:
+                dictionaryBasic();
+                break;
+        }
     }
+
+
+
+
 }
