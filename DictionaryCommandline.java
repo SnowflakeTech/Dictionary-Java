@@ -31,7 +31,7 @@ public class DictionaryCommandline {
             System.out.println("2. Hiển thị tất cả các từ");
             System.out.println("3. Tìm kiếm từ tiếng Anh");
             System.out.println("4. Tìm kiếm từ tiếng Việt");
-            System.out.println("5. Thoát chương trình");
+            System.out.println("0. Thoát chương trình");
             if (!input.hasNextInt()) {
                 System.out.println("Lựa chọn không hợp lệ. Vui lòng chọn lại.");
                 input.nextLine(); // consume the invalid input
@@ -62,7 +62,7 @@ public class DictionaryCommandline {
                     String find_Vmean = input.nextLine();
                     dictionaryManagement.searchByVietnamese(find_Vmean);
                     break;
-                case 5:
+                case 0:
                     System.out.println("Exit");
                     System.exit(0);
                 default:
