@@ -1,29 +1,59 @@
-package org.example;
-import java.util.*;
-import java.io.*;
+import java.util.Scanner;
+import java.util.InputMismatchException;
+
 public class DictionaryManagement {
-     Dictionary dictionary = new Dictionary();
+    Dictionary dictionary = new Dictionary();
 
     public void insertFromCommandline() {
+        Scanner input = new Scanner(System.in);
+    
         try {
-            Scanner input = new Scanner(System.in);
-            System.out.print("Nhập số lượng từ vựng: ");
-            int number = input.nextInt();
+            int number = -1;
+            boolean validInput = false;
+    
+            while (!validInput) {
+                System.out.print("Nhập số lượng từ vựng: ");
+    
+                try {
+                    number = input.nextInt();
+                    validInput = true;
+                } catch (InputMismatchException e) {
+                    System.out.println("Số lượng từ vựng không hợp lệ. Vui lòng nhập một số nguyên.");
+                    input.nextLine(); // Consume the invalid input
+                }
+            }
+    
+            if (number <= 0) {
+                System.out.println("Số lượng từ vựng không hợp lệ!");
+                return;
+            }
+    
+            input.nextLine(); // Consume the newline character
+    
             for (int i = 0; i < number; i++) {
-                System.out.print("Nhập từ tiếng Anh thứ " + (i+1) + ": ");
-                String english = input.next();
-                System.out.print("Nhập giải thích bằng tiếng Việt: " );
-                String vietnamese = input.next();
+                System.out.print("Nhập từ tiếng Anh thứ " + (i + 1) + ": ");
+                String english = input.nextLine();
+    
+                if (english.matches(".*[!@#$%^&*()_+\\-=\\[\\]{};':\"\\\\|,.<>/?].*")) {
+                    System.out.println("Từ tiếng Anh không hợp lệ. Vui lòng nhập từ không chứa ký tự đặc biệt.");
+                    i--; // Decrement the index to re-enter this word.
+                    continue;
+                }
+    
+                System.out.print("Nhập giải thích bằng tiếng Việt thứ " + (i + 1) + ": ");
+                String vietnamese = input.nextLine();
+    
+                if (vietnamese.matches(".*[!@#$%^&*()_+\\-=\\[\\]{};':\"\\\\|,.<>/?].*")) {
+                    System.out.println("Nghĩa tiếng Việt không hợp lệ. Vui lòng nhập nghĩa không chứa ký tự đặc biệt.");
+                    i--; // Decrement the index to re-enter this word.
+                    continue;
+                }
+    
                 Word newWord = new Word(english, vietnamese);
                 dictionary.words.add(newWord);
             }
-            input.close();
-        }
-        catch(InputMismatchException e) {
-            System.out.println("Số lượng từ vựng k hợp lệ!");
-        }
-        catch(Exception e) {
-            System.out.println("Lỗi" + e.getMessage());
+        } catch (Exception e) {
+            System.out.println("Lỗi: " + e.getMessage());
         }
     }
 
@@ -41,26 +71,12 @@ public class DictionaryManagement {
         dictionary.words.removeIf(word -> word.word_target.equals(wordTarget));
     }
 
-    public void searchByEnglish(String english) {
-        for (Word word : dictionary.words) {
-            if (word.word_target.equals(english)) {
-                System.out.println("Từ tiếng Anh: " + word.word_target);
-                System.out.println("Giải thích tiếng Việt: " + word.word_explain);
-                return;
+    public String findMean(String englishWord) {
+        for(Word word : dictionary.words) {
+            if(word.getWord_target().equals(englishWord)) {
+                return word.getWord_explain();
             }
         }
-        System.out.println("Không tìm thấy từ tiếng Anh: " + english);
+        return "Từ k có nghĩa";
     }
-
-    public void searchByVietnamese(String vietnamese) {
-        for (Word word : dictionary.words) {
-            if (word.word_explain.equals(vietnamese)) {
-                System.out.println("Từ tiếng Anh: " + word.word_target);
-                System.out.println("Giải thích tiếng Việt: " + word.word_explain);
-                return;
-            }
-        }
-        System.out.println("Không tìm thấy từ có nghĩa: " + vietnamese);
-    }
-
 }

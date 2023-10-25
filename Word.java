@@ -1,6 +1,3 @@
-package org.example;
-import java.util.*;
-import java.io.*;
 public class Word {
      public String word_target;
      public String word_explain;
@@ -24,5 +21,14 @@ public class Word {
 
     public void setWord_explain(String word_explain) {
         this.word_explain = word_explain;
+    }
+    
+    /**
+     * Sắp xếp.
+     * @param other từ khác
+     * @return mảng đã sắp xếp
+     */ 
+    public int compareTo(Word other) {
+        return this.word_target.compareToIgnoreCase(other.word_target);
     }
 }
