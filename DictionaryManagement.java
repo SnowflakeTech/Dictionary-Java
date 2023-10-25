@@ -50,7 +50,7 @@ public class DictionaryManagement {
                 }
     
                 Word newWord = new Word(english, vietnamese);
-                dictionary.words.add(newWord);
+                dictionary.getAllWords().add(newWord);
             }
         } catch (Exception e) {
             System.out.println("Lỗi: " + e.getMessage());
@@ -58,7 +58,7 @@ public class DictionaryManagement {
     }
 
     public void editWord(String oldWordTarget, String newWordTarget, String newWordExplain) {
-        for (Word word : dictionary.words) {
+        for (Word word : dictionary.getAllWords()) {
             if (word.word_target.equals(oldWordTarget)) {
                 word.word_target = newWordTarget;
                 word.word_explain = newWordExplain;
@@ -68,15 +68,40 @@ public class DictionaryManagement {
     }
 
     public void removeWord(String wordTarget) {
-        dictionary.words.removeIf(word -> word.word_target.equals(wordTarget));
+        dictionary.getAllWords().removeIf(word -> word.word_target.equals(wordTarget));
     }
 
     public String findMean(String englishWord) {
-        for(Word word : dictionary.words) {
+        for(Word word : dictionary.getAllWords()) {
             if(word.getWord_target().equals(englishWord)) {
                 return word.getWord_explain();
             }
         }
         return "Từ k có nghĩa";
     }
+
+
+    public void dictionaryExportToFile(String file) {
+
+    }
+
+    public void dictionaryLookup(String word) {
+        for (Word entry : dictionary.getAllWords()) {
+            if (entry.getWord_target().equalsIgnoreCase(word)) {
+                System.out.println("Meaning: " + entry.getWord_explain());
+                return;
+            }
+        }
+        System.out.println("Word not found in the dictionary.");
+    }
+
+    public void dictionarySearcher (String prefix) {
+
+    }
+
+    public void insertFromFile(String file) {
+
+    }
+
+
 }
