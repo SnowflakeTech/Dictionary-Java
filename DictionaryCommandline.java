@@ -1,4 +1,5 @@
 import java.util.*;
+import OurProjectOOP.Word;
 public class DictionaryCommandline {
     DictionaryManagement dictionaryManagement = new DictionaryManagement();
 
