@@ -1,6 +1,9 @@
+package com.example.dictionary;
 import java.util.*;
+
 public class DictionaryCommandline {
     DictionaryManagement dictionaryManagement = new DictionaryManagement();
+    Scanner input = new Scanner(System.in);
 
     public void sortWords() {
         // Sắp xếp danh sách từ theo thứ tự alphabet
@@ -58,7 +61,7 @@ public class DictionaryCommandline {
                             break;
                         case 2:
                             // Implement delete a word
-                            dictionaryManagement.removeWord(null);
+                            dictionaryManagement.deleteWord();
                             break;
                         case 3:
                             // Implement edit a word
