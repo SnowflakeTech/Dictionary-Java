@@ -2,7 +2,6 @@ package com.example.dictionary;
 import java.util.Scanner;
 import java.util.InputMismatchException;
 
-import OurProjectOOP.Word;
 public class DictionaryManagement {
     Dictionary dictionary = new Dictionary();
 
@@ -124,9 +123,4 @@ public class DictionaryManagement {
     public void insertFromFile(String file) {
 
     }
-<<<<<<< HEAD
-=======
-
-
->>>>>>> 06c03390bbb7c5bdc3812b42f6eeeb457fc0f448
 }
