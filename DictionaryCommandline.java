@@ -65,6 +65,8 @@ public class DictionaryCommandline {
                             break;
                         case 3:
                             // Implement edit a word
+                            String word = input.nextLine();
+                            dictionaryManagement.editWord(word);
                             break;
                         case 4:
                             showAllWords();

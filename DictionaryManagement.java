@@ -4,10 +4,9 @@ import java.util.InputMismatchException;
 
 public class DictionaryManagement {
     Dictionary dictionary = new Dictionary();
+    Scanner input = new Scanner(System.in);
 
     public void insertFromCommandline() {
-        Scanner input = new Scanner(System.in);
-
         try {
             int number = -1;
             boolean validInput = false;
@@ -58,15 +57,31 @@ public class DictionaryManagement {
         }
     }
 
-    public void editWord(String oldWordTarget, String newWordTarget, String newWordExplain) {
+    public Word findWordByEnglish(String wordToFind) {
         for (Word word : dictionary.getAllWords()) {
-            if (word.word_target.equals(oldWordTarget)) {
-                word.word_target = newWordTarget;
-                word.word_explain = newWordExplain;
-                break;
+            if (word.getWord_target().equalsIgnoreCase(wordToFind)) {
+                return word;
             }
         }
+        return null; // Trả về null nếu không tìm thấy từ
     }
+
+    public void editWord(String wordToEdit) {
+        Word word = findWordByEnglish(wordToEdit);
+
+        if (word != null) {
+            System.out.println("Word found: " + word.getWord_target());
+            System.out.print("Enter the new Vietnamese explanation: ");
+            String newExplanation = input.nextLine();
+
+            // Update the Vietnamese explanation of the word
+            word.setWord_explain(newExplanation);
+            System.out.println("Word has been updated.");
+        } else {
+            System.out.println("Word not found in the dictionary.");
+        }
+    }
+
 
     public boolean findAndDeleteWordByEnglish(String WordTarget) {
         int index = -1;
