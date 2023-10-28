@@ -1,4 +1,4 @@
-package com.example.dictionary;
+package DictionaryApp;
 import java.util.*;
 
 public class DictionaryCommandline {
@@ -65,7 +65,8 @@ public class DictionaryCommandline {
                             break;
                         case 3:
                             // Implement edit a word
-                            String word = input.nextLine();
+                            System.out.print("Enter a word to edit: ");
+                            String word = scanner.nextLine();
                             dictionaryManagement.editWord(word);
                             break;
                         case 4:
