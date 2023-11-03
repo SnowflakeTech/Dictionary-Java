@@ -1,7 +1,7 @@
 package com.example.dictionary;
 import java.util.*;
 
-public class DictionaryCommandline {
+public class DictionaryCommandline extends Dictionary {
     DictionaryManagement dictionaryManagement = new DictionaryManagement();
     Scanner input = new Scanner(System.in);
 
@@ -65,7 +65,8 @@ public class DictionaryCommandline {
                             break;
                         case 3:
                             // Implement edit a word
-                            String word = input.nextLine();
+                            System.out.print("Enter a word to edit: ");
+                            String word = scanner.nextLine();
                             dictionaryManagement.editWord(word);
                             break;
                         case 4:
@@ -85,10 +86,10 @@ public class DictionaryCommandline {
                             // Implement game section
                             break;
                         case 8:
-                            dictionaryManagement.insertFromFile("dictionaries.txt");
+                            dictionaryManagement.insertFromFile();
                             break;
                         case 9:
-                            dictionaryManagement.dictionaryExportToFile("exported_dictionary.txt");
+                            dictionaryManagement.dictionaryExportToFile();
                             break;
                         default:
                             System.out.println("Action not supported.");
