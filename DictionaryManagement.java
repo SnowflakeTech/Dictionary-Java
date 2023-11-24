@@ -1,11 +1,12 @@
 package com.example.dictionary;
+
 import java.io.*;
 import java.util.Scanner;
 import java.io.BufferedReader;
 import java.util.InputMismatchException;
 
 public class DictionaryManagement extends Dictionary {
-    Dictionary dictionary = new Dictionary();
+
     Scanner input = new Scanner(System.in);
     public static final String Path_In = "D:\\PhamSon Java\\Dictionary\\src\\main\\java\\com\\example\\dictionary\\dictionaries.txt";
     public static final String Path_Out = "D:\\PhamSon Java\\Dictionary\\src\\main\\java\\com\\example\\dictionary\\dictionaries_out.txt";
@@ -68,7 +69,7 @@ public class DictionaryManagement extends Dictionary {
                 }
 
                 Word newWord = new Word(english, vietnamese);
-                dictionary.getAllWords().add(newWord);
+                dictionary.add(newWord);
             }
         } catch (Exception e) {
             System.out.println("Lỗi: " + e.getMessage());
@@ -76,12 +77,12 @@ public class DictionaryManagement extends Dictionary {
     }
 
     public Word findWordByEnglish(String wordToFind) {
-        for (Word word : dictionary.getAllWords()) {
+        for (Word word : dictionary) {
             if (word.getWord_target().equalsIgnoreCase(wordToFind)) {
                 return word;
             }
         }
-        return null; // Trả về null nếu không tìm thấy từ
+        return null;
     }
 
     public void editWord(String wordToEdit) {
@@ -122,15 +123,15 @@ public class DictionaryManagement extends Dictionary {
     public boolean findAndDeleteWordByEnglish(String WordTarget) {
         int index = -1;
 
-        for (int i = 0; i < dictionary.getAllWords().size(); i++) {
-            if (dictionary.getAllWords().get(i).getWord_target().equalsIgnoreCase(WordTarget)) {
+        for (int i = 0; i < dictionary.size(); i++) {
+            if (dictionary.get(i).getWord_target().equalsIgnoreCase(WordTarget)) {
                 index = i;
                 break;
             }
         }
 
         if (index != -1) {
-            dictionary.getAllWords().remove(index);
+            dictionary.remove(index);
             return true; // Trả về true nếu từ được tìm thấy và xóa thành công
         } else {
             return false; // Trả về false nếu từ không tồn tại trong từ điển
@@ -157,7 +158,7 @@ public class DictionaryManagement extends Dictionary {
 
     public void dictionaryExportToFile() {
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(Path_Out))) {
-            for (Word entry : dictionary.getAllWords()) {
+            for (Word entry : dictionary) {
                 writer.write(entry.toString() + "\n");
             }
             System.out.println("Data exported to " + Path_Out);
@@ -172,7 +173,7 @@ public class DictionaryManagement extends Dictionary {
      */
     public void dictionaryLookup(String word) {
         System.out.println("Nhập từ cần tìm kiếm: ");
-        for (Word entry : dictionary.getAllWords()) {
+        for (Word entry : dictionary) {
             if (entry.getWord_target().equalsIgnoreCase(word)) {
                 System.out.println("Meaning: " + entry.getWord_explain());
                 return;
@@ -188,10 +189,18 @@ public class DictionaryManagement extends Dictionary {
      */
     public void dictionarySearcher (String prefix) {
         System.out.println("Nhp tiền tố của một từ Tếng Anh" + prefix + ":");
-        for (Word word : dictionary.getAllWords()) {
+        for (Word word : dictionary) {
             if (word.getWord_target().startsWith(prefix)) {
                 System.out.println(word.getWord_target());
             }
+        }
+    }
+
+    static String standardize(String s) {
+        if (s.length() == 1) {
+            return s.toUpperCase();
+        } else {
+            return s.substring(0, 1).toUpperCase() + s.substring(1).toLowerCase();
         }
     }
 
@@ -205,7 +214,7 @@ public class DictionaryManagement extends Dictionary {
 
                 if (parts.length == 2) {
                     Word word = new Word(parts[0], parts[1]);
-                    dictionary.getAllWords().add(word);
+                    dictionary.add(word);
                 } else {
                     // Xử lý lỗi dòng không hợp lệ (có thể ghi vào tệp lỗi)
                     System.out.println("Dòng không hợp lệ: " + line);

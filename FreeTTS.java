@@ -1,12 +1,12 @@
-package uet.oop.ourtreedictionary;
+package com.example.dictionary;
 import com.sun.speech.freetts.Voice;
 import com.sun.speech.freetts.VoiceManager;
-public class DictAudio {
+public class FreeTTS {
 
     Voice voice;
 
-    public DictAudio() {
-        // Sử dụng giọng nữ "kevin16" (bạn có thể thay đổi thành giọng khác nếu muốn)
+    public FreeTTS() {
+
         System.setProperty("freetts.voices", "com.sun.speech.freetts.en.us.cmu_us_kal.KevinVoiceDirectory");
         voice = VoiceManager.getInstance().getVoice("kevin16");
 
@@ -19,7 +19,6 @@ public class DictAudio {
 
     public void play(String word) {
         try {
-            // Đặt tốc độ nói chậm hơn (giảm giá trị để làm chậm hơn)
             voice.setRate(100);
             voice.setPitch(100);
             voice.setVolume(10);
