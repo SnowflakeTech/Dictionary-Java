@@ -3,6 +3,7 @@ package com.example.dictionary;
 public class Word {
     public String word_target;
     public String word_explain;
+    private char target;
 
     /**
      * Constructor Word.
@@ -14,6 +15,9 @@ public class Word {
         this.word_explain = word_explain;
     }
 
+    public char getTarget() {
+        return target;
+    }
     public String getWord_target() {
         return word_target;
     }
