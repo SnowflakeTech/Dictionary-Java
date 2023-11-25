@@ -37,7 +37,7 @@ public class DictionaryUI extends DictionaryManagement{
 
     public String removeWordUI(String word, Word words) {
         String word_Explain = words.searchWordInTrie(word);
-        if (word_Explain.equals("We can't find it!")) {
+        if (word_Explain.equals("Không tìm thấy từ!")) {
             return word_Explain;
         } else {
             if (words.equals(toVietnamese)) {
@@ -53,7 +53,7 @@ public class DictionaryUI extends DictionaryManagement{
 
     String dictionaryModWord(String word, String newWord, Word words) {
         String vie = words.searchWordInTrie(word);
-        if (vie.equals("We can't find it!")) {
+        if (vie.equals("Không tìm thấy từ!")) {
             return vie;
         } else {
             if (words.equals(toVietnamese)) {
