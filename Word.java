@@ -102,7 +102,7 @@ public class Word extends Dictionary{
                 }
             }
         }
-        return "The word does not exist !";
+        return "Word does not exits !";
     }
 
     public String searchWordInTrie(String word) {
@@ -116,7 +116,7 @@ public class Word extends Dictionary{
                 return w.searchWordInTrie(word.substring(1));
             }
         }
-        return "The word does not exist !";
+        return "Word does not exits !";
     }
     public Word searchPart(String part) {
         char c = part.charAt(0);
@@ -133,7 +133,7 @@ public class Word extends Dictionary{
         return new Word(' ', "");
     }
 
-    public int numberOfBranches(String word, int index) {
+    public int numberOfBranchs(String word, int index) {
         word += getTarget();
         if (!getWord_explain().equals(" ")) {
             index ++;
@@ -141,7 +141,7 @@ public class Word extends Dictionary{
         }
         if (dictionary.size() != 0) {
             for (Word w : dictionary) {
-                index = w.numberOfBranches(word, index);
+                index = w.numberOfBranchs(word, index);
             }
         }
         return index;

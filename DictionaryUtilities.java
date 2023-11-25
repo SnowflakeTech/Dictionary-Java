@@ -11,6 +11,9 @@ import java.util.Date;
 import java.util.Scanner;
 
 public class DictionaryUtilities extends Dictionary {
+    DictionaryUtilities() {
+
+    }
     public void sortInTrie(Word target) {
         if (target.dictionary.size() > 1) {
             for (int i = target.dictionary.size() - 1; i > 0; i--) {
@@ -34,7 +37,7 @@ public class DictionaryUtilities extends Dictionary {
         return formattedIndex + formattedFirstWord + "| " + secondWord;
     }
 
-    public void insertFromFileUtils(Word dictionaryEng, Word dictionaryVie) {
+    static void insertFromFileUtils(Word dictionaryEng, Word dictionaryVie) {
         Scanner sc;    // Using scanner to receive data from external file.
         Scanner parser;    // Using scanner to parse strings from external file.
         String wordEng;
@@ -73,7 +76,7 @@ public class DictionaryUtilities extends Dictionary {
     /**
      * Export to file (Utility Method).
      */
-    public void dictionaryExportToFileUtils(Word dictionaryEng) {
+    static void dictionaryExportToFileUtils(Word dictionaryEng) {
         // Output date
         Date today = new Date();
         SimpleDateFormat dateFormatter = new SimpleDateFormat("dd-MM-yyyy");
@@ -93,6 +96,14 @@ public class DictionaryUtilities extends Dictionary {
             } while (index < dictToFile.size());
         } catch (IOException e) {
             System.out.println("<!> Error during reading/writing <!>");
+        }
+    }
+
+    static String standardize(String s) {
+        if (s.length() == 1) {
+            return s.toUpperCase();
+        } else {
+            return s.substring(0, 1).toUpperCase() + s.substring(1).toLowerCase();
         }
     }
 }

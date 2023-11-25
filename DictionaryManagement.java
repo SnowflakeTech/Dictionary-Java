@@ -196,13 +196,6 @@ public class DictionaryManagement extends Dictionary {
         }
     }
 
-    static String standardize(String s) {
-        if (s.length() == 1) {
-            return s.toUpperCase();
-        } else {
-            return s.substring(0, 1).toUpperCase() + s.substring(1).toLowerCase();
-        }
-    }
 
     public void insertFromFile() {
         try (BufferedReader reader = new BufferedReader(new FileReader(Path_In));
@@ -224,4 +217,6 @@ public class DictionaryManagement extends Dictionary {
             e.printStackTrace();
         }
     }
+
+
 }
