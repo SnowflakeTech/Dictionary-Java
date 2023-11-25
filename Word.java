@@ -102,7 +102,7 @@ public class Word extends Dictionary{
                 }
             }
         }
-        return "Word does not exits !";
+        return "The word does not exist !";
     }
 
     public String searchWordInTrie(String word) {
