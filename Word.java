@@ -116,7 +116,7 @@ public class Word extends Dictionary{
                 return w.searchWordInTrie(word.substring(1));
             }
         }
-        return "Word does not exits !";
+        return "The word does not exist !";
     }
     public Word searchPart(String part) {
         char c = part.charAt(0);
