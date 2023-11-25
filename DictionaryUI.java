@@ -58,14 +58,14 @@ public class DictionaryUI extends DictionaryManagement{
         } else {
             if (words.equals(toVietnamese)) {
                 toVietnamese.removeWordInTrie(word);
-                toEnglish.removeWordInTrie();
-                dictionaryEng.addWord(newWord, mean);
-                dictionaryVie.addWord(mean, newWord);
+                toEnglish.removeWordInTrie(vie);
+                toVietnamese.addWordToTrie(newWord, vie);
+                toEnglish.addWordToTrie(vie, newWord);
             } else {
-                dictionaryVie.deleteWord(word);
-                dictionaryEng.deleteWord(mean);
-                dictionaryVie.addWord(newWord, mean);
-                dictionaryEng.addWord(mean, newWord);
+                toEnglish.removeWordInTrie(word);
+                toVietnamese.removeWordInTrie(vie);
+                toEnglish.addWordToTrie(newWord, vie);
+                toVietnamese.addWordToTrie(vie, newWord);
             }
             return "Done";
         }
