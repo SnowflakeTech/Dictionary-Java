@@ -133,7 +133,7 @@ public class Word extends Dictionary{
         return new Word(' ', "");
     }
 
-    public int numberOfBranchs(String word, int index) {
+    public int numberOfBranches(String word, int index) {
         word += getTarget();
         if (!getWord_explain().equals(" ")) {
             index ++;
@@ -141,7 +141,7 @@ public class Word extends Dictionary{
         }
         if (dictionary.size() != 0) {
             for (Word w : dictionary) {
-                index = w.numberOfBranchs(word, index);
+                index = w.numberOfBranches(word, index);
             }
         }
         return index;
