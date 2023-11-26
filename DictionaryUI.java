@@ -53,7 +53,7 @@ public class DictionaryUI {
         }
     }
 
-    String dictionaryModWord(String word, String newWord, Word words) {
+    String editWordUI(String word, String newWord, Word words) {
         String vie = words.searchWordInTrie(word);
         if (vie.equals("We can't find it!")) {
             return vie;

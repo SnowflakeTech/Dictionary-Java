@@ -62,8 +62,7 @@ public class DictionaryUtilities extends Dictionary {
             }
             System.out.println("Imported from file!");
         } catch (IOException e) {
-            System.out.println("<!> Make sure you have dictionaries.txt in the src folder <!>");
-            // e.printStackTrace();  for debugging
+            e.printStackTrace();
         }
     }
 

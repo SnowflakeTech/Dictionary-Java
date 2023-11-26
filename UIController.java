@@ -229,12 +229,12 @@ public class UIController {
             if (togEng.isSelected()) {
 
                 isModWordDone.setText(
-                        dictionaryUI.dictionaryModWord(
+                        dictionaryUI.editWordUI(
                                 modWordOldStr, modWordNewStr, dictionaryUI.toVietnamese));
             } else {
 
                 isModWordDone.setText(
-                        dictionaryUI.dictionaryModWord(
+                        dictionaryUI.editWordUI(
                                 modWordOldStr, modWordNewStr, dictionaryUI.toEnglish));
             }
         } else {
