@@ -6,10 +6,12 @@ import java.io.BufferedReader;
 import java.util.InputMismatchException;
 
 public class DictionaryManagement extends Dictionary {
-
+    Word toEnglish = new Word(' ', " ");
+    Word toVietnamese = new Word(' ', " ");
+    DictionaryUtilities dictionaryUtilities = new DictionaryUtilities();
     Scanner input = new Scanner(System.in);
-    public static final String Path_In = "D:\\PhamSon Java\\Dictionary\\src\\main\\java\\com\\example\\dictionary\\dictionaries.txt";
-    public static final String Path_Out = "D:\\PhamSon Java\\Dictionary\\src\\main\\java\\com\\example\\dictionary\\dictionaries_out.txt";
+    public static final String Path_In = "D:\\PhamSonJava\\Dictionary\\src\\main\\java\\com\\example\\dictionary\\dictionaries.txt";
+    public static final String Path_Out = "D:\\PhamSonJava\\Dictionary\\src\\main\\java\\com\\example\\dictionary\\dictionaries_out.txt";
 
     /**
      * Hàm kiểm tra ký tự hợp lệ.
@@ -217,6 +219,5 @@ public class DictionaryManagement extends Dictionary {
             e.printStackTrace();
         }
     }
-
 
 }

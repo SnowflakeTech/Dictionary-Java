@@ -24,45 +24,41 @@ public class DictionaryUtilities extends Dictionary {
         }
     }
 
-    public void formatStringAndPrint(int index, String firstWord, String secondWord) {
+    public void formatContent(int index, String firstWord, String secondWord) {
         String formattedIndex = String.format("%5s", index);
         String formattedFirstWord = String.format("|%-12s", firstWord);
 
         System.out.printf("%s%s|%s%n", formattedIndex, formattedFirstWord, secondWord);
     }
 
-    public String formatStringAndReturn(int index, String firstWord, String secondWord) {
+    public String formatContentAndReturn(int index, String firstWord, String secondWord) {
         String formattedIndex = String.format("%5s", index);
         String formattedFirstWord = String.format("|%-12s", firstWord);
         return formattedIndex + formattedFirstWord + "| " + secondWord;
     }
 
     static void insertFromFileUtils(Word dictionaryEng, Word dictionaryVie) {
-        Scanner sc;    // Using scanner to receive data from external file.
-        Scanner parser;    // Using scanner to parse strings from external file.
-        String wordEng;
-        String wordVie;
-        String readLine;
+        Scanner input;
+        Scanner parser;
+        String english;
+        String vietnamese;
+        String lines;
 
         try {
-            // Open file
-            FileReader dictionaryFile = new FileReader("D:\\PhamSon Java\\Dictionary\\src\\main\\java\\com\\example\\dictionary\\dictionaries.txt");
+            FileReader filePath = new FileReader("D:\\PhamSon Java\\Dictionary\\src\\main\\java\\com\\example\\dictionary\\dictionaries.txt");
+            input = new Scanner(filePath);
 
-            // Read file
-            sc = new Scanner(dictionaryFile);
-
-            // Imply that the input file is P E R F E C T
-            while (sc.hasNextLine()) {
-                readLine = sc.nextLine();
-                parser = new Scanner(readLine);
+            while (input.hasNextLine()) {
+                lines = input.nextLine();
+                parser = new Scanner(lines);
                 parser.useDelimiter("\t");
 
-                wordEng = parser.next();
-                wordVie = parser.next();
+                english = parser.next();
+                vietnamese = parser.next();
 
                 //Input
-                dictionaryEng.addWordToTrie(wordEng, wordVie);
-                dictionaryVie.addWordToTrie(wordVie, wordEng);
+                dictionaryEng.addWordToTrie(english, vietnamese);
+                dictionaryVie.addWordToTrie(vietnamese, english);
             }
             System.out.println("Imported from file!");
         } catch (IOException e) {
@@ -76,7 +72,7 @@ public class DictionaryUtilities extends Dictionary {
     /**
      * Export to file (Utility Method).
      */
-    static void dictionaryExportToFileUtils(Word dictionaryEng) {
+    static void dictionaryExportToFileUtils(Word english) {
         // Output date
         Date today = new Date();
         SimpleDateFormat dateFormatter = new SimpleDateFormat("dd-MM-yyyy");
@@ -85,7 +81,7 @@ public class DictionaryUtilities extends Dictionary {
 
         try (BufferedWriter out = new BufferedWriter(new FileWriter(dictFileName))) {
             ArrayList<String> dictToFile = new ArrayList<>();
-            dictionaryEng.numbersOfDictionaryToFile(dictToFile, "", 0);
+            english.numbersOfDictionaryToFile(dictToFile, "", 0);
             String inputLine;
             int index = 0;
             do {
@@ -95,7 +91,7 @@ public class DictionaryUtilities extends Dictionary {
                 ++index;
             } while (index < dictToFile.size());
         } catch (IOException e) {
-            System.out.println("<!> Error during reading/writing <!>");
+            e.printStackTrace();
         }
     }
 

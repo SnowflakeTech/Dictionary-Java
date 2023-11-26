@@ -1,6 +1,7 @@
 package com.example.dictionary;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
+import javafx.stage.Stage;
 
 import java.util.Objects;
 
@@ -8,24 +9,15 @@ import static com.example.dictionary.TranslateAPI.*;
 
 public class UIController {
 
-    DictionaryUI dictionary = new DictionaryUI();
+    DictionaryUI dictionaryUI = new DictionaryUI();
     FreeTTS audio = new FreeTTS();
 
-    //-----------------------------------------------------------------------------------------------------------------------------//
-
-    /**
-     * Search word panel.
-     */
+    @FXML
+    private TextField engFieldWord = new TextField();
 
     @FXML
-    private TextField engFieldWord = new TextField();       // English word field.
+    private TextField vieFieldWord = new TextField();
 
-    @FXML
-    private TextField vieFieldWord = new TextField();       // Vietnamese word field.
-
-    /**
-     * Translate when button is pressed.
-     */
     @FXML
     protected void searchWord() {
         String wordEn = "";
@@ -37,18 +29,15 @@ public class UIController {
             wordVi = DictionaryUtilities.standardize(vieFieldWord.getText());
         }
         if (!wordEn.equals("") && wordVi.equals("")) {
-            vieFieldWord.setText(dictionary.dictionaryLookup(wordEn, dictionary.toVietnamese));
+            vieFieldWord.setText(dictionaryUI.dictionaryLookup(wordEn, dictionaryUI.toVietnamese));
         } else if (wordEn.equals("") && !wordVi.equals("")) {
-            engFieldWord.setText(dictionary.dictionaryLookup(wordVi, dictionary.toEnglish));
+            engFieldWord.setText(dictionaryUI.dictionaryLookup(wordVi, dictionaryUI.toEnglish));
         } else {
             engFieldWord.setText("");
             vieFieldWord.setText("");
         }
     }
 
-    /**
-     * Clear other field when this field's text change.
-     */
     @FXML
     protected void clearEngWord() {
         engFieldWord.setText("");
@@ -58,12 +47,6 @@ public class UIController {
     protected void clearVieWord() {
         vieFieldWord.setText("");
     }
-
-    //----------------------------------------------------------------------------------------------------------------//
-
-    /**
-     * Search part panel.
-     */
 
     @FXML
     private TextField engFieldPart = new TextField();           // English input word field.
@@ -77,9 +60,6 @@ public class UIController {
     @FXML
     private TextArea vieAreaPart = new TextArea();              // Vietnamese output word field.
 
-    /**
-     * Search all English words that have the part and its meaning.
-     */
     @FXML
     protected void searchPartEng() {
         String word = "";
@@ -91,14 +71,11 @@ public class UIController {
             vieAreaPart.setText("");
         } else {
             vieFieldPart.setText("");
-            engAreaPart.setText(dictionary.getAllWordsUI(word, dictionary.toVietnamese));
-            vieAreaPart.setText(dictionary.getAllMeansUI(word, dictionary.toVietnamese));
+            engAreaPart.setText(dictionaryUI.getAllWordsUI(word, dictionaryUI.toVietnamese));
+            vieAreaPart.setText(dictionaryUI.getAllMeansUI(word, dictionaryUI.toVietnamese));
         }
     }
 
-    /**
-     * Search all Vietnamese words that have the part and its meaning.
-     */
     @FXML
     protected void searchPartVie() {
         String word = "";
@@ -110,16 +87,10 @@ public class UIController {
             vieAreaPart.setText("");
         } else {
             engFieldPart.setText("");
-            vieAreaPart.setText(dictionary.getAllWordsUI(word, dictionary.toEnglish));
-            engAreaPart.setText(dictionary.getAllMeansUI(word, dictionary.toEnglish));
+            vieAreaPart.setText(dictionaryUI.getAllWordsUI(word, dictionaryUI.toEnglish));
+            engAreaPart.setText(dictionaryUI.getAllMeansUI(word, dictionaryUI.toEnglish));
         }
     }
-
-    //----------------------------------------------------------------------------------------------------------------//
-
-    /**
-     * Add word.
-     */
 
     @FXML
     private TextField addWordEng = new TextField();                 // English input word field.
@@ -128,11 +99,8 @@ public class UIController {
     private TextField addWordVie = new TextField();                 // Vietnamese input word field.
 
     @FXML
-    private Label isAddDone = new Label();                          // Label return system respond action success or not
+    private Label isAddDone = new Label();
 
-    /**
-     * Add a pair of English and Vietnamese word to dictionary.
-     */
     @FXML
     protected void addWord() {
         String wordEng = "";
@@ -147,18 +115,12 @@ public class UIController {
         boolean bothNotEmpty = !Objects.equals(wordEng, "") && !Objects.equals(wordVie, "");
 
         if (bothNotEmpty) {
-            dictionary.addWordUI(wordEng, wordVie);
+            dictionaryUI.addWordUI(wordEng, wordVie);
             isAddDone.setText("Done");
         } else {
             isAddDone.setText("Input the word and its meaning");
         }
     }
-
-    //---------------------------------//
-
-    /**
-     * Delete word.
-     */
 
     @FXML
     private TextField deleteWordEng = new TextField();              // English input word field.
@@ -169,9 +131,6 @@ public class UIController {
     @FXML
     private Label isDelDone = new Label();                          // Label return system respond action success or not
 
-    /**
-     * Delete a pair of English and Vietnamese word to dictionary.
-     */
     @FXML
     protected void deleteWord() {
         String wEng = "";
@@ -183,19 +142,13 @@ public class UIController {
             wVie = DictionaryUtilities.standardize(deleteWordVie.getText());
         }
         if (!wEng.equals("") && wVie.equals("")) {
-            isDelDone.setText(dictionary.removeWordUI(wEng, dictionary.toVietnamese));
+            isDelDone.setText(dictionaryUI.removeWordUI(wEng, dictionaryUI.toVietnamese));
         } else if (wEng.equals("") && !wVie.equals("")) {
-            isDelDone.setText(dictionary.removeWordUI(wVie, dictionary.toEnglish));
+            isDelDone.setText(dictionaryUI.removeWordUI(wVie, dictionaryUI.toEnglish));
         } else {
             isDelDone.setText("Delete an English or a Vietnamese word at one time");
         }
     }
-
-    //---------------------------------//
-
-    /**
-     * Toggle stuff support below action.
-     */
 
     @FXML
     private ToggleButton togEng = new ToggleButton();
@@ -203,9 +156,6 @@ public class UIController {
     @FXML
     private ToggleButton togVie = new ToggleButton();
 
-    /**
-     * Make an English/Vietnamese switch.
-     */
     @FXML
     protected void toggleReady() {
         togEng.setSelected(true);
@@ -222,16 +172,15 @@ public class UIController {
         togEng.setSelected(!togVie.isSelected());
     }
 
-    //---------------------------------//
 
     @FXML
-    private TextField modWordOld = new TextField();                 // old word input field.
+    private TextField modWordOld = new TextField();
 
     @FXML
-    private TextField modWordNew = new TextField();                 // new word input field.
+    private TextField modWordNew = new TextField();
 
     @FXML
-    private Label isModWordDone = new Label();                      // Label return system respond action success or not
+    private Label isModWordDone = new Label();
 
     @FXML
     private Label modifyWordLabel = new Label();
@@ -239,9 +188,6 @@ public class UIController {
     @FXML
     private Button refressButton = new Button();
 
-    /**
-     * Do nothing (reset state-view).
-     */
     @FXML
     protected void refresher() {
         if (togEng.isSelected()) {
@@ -255,9 +201,6 @@ public class UIController {
         }
     }
 
-    /**
-     * Modify the word but keep it meaning / modify its meaning but keep the word.
-     */
     @FXML
     protected void modifyWord() {
         String modWordOldStr = "";
@@ -286,43 +229,35 @@ public class UIController {
             if (togEng.isSelected()) {
 
                 isModWordDone.setText(
-                        dictionary.dictionaryModWord(
-                                modWordOldStr, modWordNewStr, dictionary.toVietnamese));
+                        dictionaryUI.dictionaryModWord(
+                                modWordOldStr, modWordNewStr, dictionaryUI.toVietnamese));
             } else {
 
                 isModWordDone.setText(
-                        dictionary.dictionaryModWord(
-                                modWordOldStr, modWordNewStr, dictionary.toEnglish));
+                        dictionaryUI.dictionaryModWord(
+                                modWordOldStr, modWordNewStr, dictionaryUI.toEnglish));
             }
         } else {
             isModWordDone.setText("Input both old and new word");
         }
     }
 
-    //----------------------------------------------------------------------------------------------------------------//
+
 
     @FXML
-    private Label isExported = new Label();                         // Label return system respond action success or not
+    private Label isExported = new Label();
 
-    /**
-     * Export all words to file
-     */
     @FXML
     protected void exportToFile() {
-        dictionary.dictionaryExportToFile();
+        dictionaryUI.newDictionaryExportToFile();
         isExported.setText("Done");
     }
 
-    /**
-     * Re-import words.
-     */
     @FXML
     protected void importFromFile() {
-        dictionary.insertFromFile();
+        dictionaryUI.newInsertFromFile();
         isExported.setText("Done");
     }
-
-    //----------------------------------------------------------------------------------------------------------------//
 
     @FXML
     private Label transStatus = new Label();
@@ -336,18 +271,10 @@ public class UIController {
     @FXML
     private TextField outputFieldTrans = new TextField();
 
-    /**
-     * Clear output field when the input change.
-     */
-
     @FXML
     protected void clearOutputField() {
         outputFieldTrans.setText("");
     }
-
-    /**
-     * Toggle stuff support below action.
-     */
 
     @FXML
     private ToggleButton toEngTrans = new ToggleButton();
@@ -355,9 +282,6 @@ public class UIController {
     @FXML
     private ToggleButton toVietTrans = new ToggleButton();
 
-    /**
-     * Make an English/Vietnamese switch.
-     */
     @FXML
     protected void toggleReadyTrans() {
         toEngTrans.setSelected(false);
@@ -374,11 +298,6 @@ public class UIController {
         toEngTrans.setSelected(!toVietTrans.isSelected());
     }
 
-    //---------------------------------//
-
-    /**
-     * Translate a word (using GoogleTransAPI).
-     */
     String translateThisWord = "";
     String translatedWord = "";
 
@@ -403,27 +322,21 @@ public class UIController {
         }
     }
 
-    /**
-     * Add a word and its translation to the dictionary.
-     */
-
     @FXML
     protected void addWordTrans() {
         boolean bothNotEmpty = !Objects.equals(translateThisWord, "") && !Objects.equals(translatedWord, "");
 
         if (bothNotEmpty) {
             if (toEngTrans.isSelected()) {
-                dictionary.addWordUI(translatedWord, translateThisWord);
+                dictionaryUI.addWordUI(translatedWord, translateThisWord);
             } else {
-                dictionary.addWordUI(translateThisWord, translatedWord);
+                dictionaryUI.addWordUI(translateThisWord, translatedWord);
             }
             addToDictTrans.setText("Done");
         } else {
             addToDictTrans.setText("Input the word and translate it first");
         }
     }
-
-    //----------------------------------------------------------------------------------------------------------------//
 
     @FXML
     protected void playEngAudio() {
@@ -435,5 +348,10 @@ public class UIController {
         }
     }
 
-    //----------------------------------------------------------------------------------------------------------------//
+    @FXML
+    private void accessGame() {
+        // Gọi lớp HangmanGame và chạy game
+        Game hangmanGame = new Game();
+        hangmanGame.start(new Stage());
+    }
 }

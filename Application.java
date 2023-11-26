@@ -14,12 +14,6 @@ public class Application extends javafx.application.Application {
         FXMLLoader fxmlLoader = new FXMLLoader(Application.class.getResource("GUI.fxml"));
         Scene scene = new Scene(fxmlLoader.load());
 
-        stage.maximizedProperty().addListener((observable, oldValue, newValue) -> {
-            if (newValue) {
-                stage.setMaximized(false);
-            }
-        });
-
         stage.setTitle("Project của nhóm ngôi sao lấp lánh trên dải ngân hà bao la rộng lớn trong không gian vũ trụ");
         stage.setScene(scene);
         stage.getIcons().add(appIcon());

@@ -7,7 +7,7 @@ public class Word extends Dictionary{
     private String word_explain;
     private char target;
 
-    public DictionaryUtilities dictionaryUtilities;
+    public DictionaryUtilities dictionaryUtilities = new DictionaryUtilities();
     public char getTarget() {
         return target;
     }
@@ -137,7 +137,7 @@ public class Word extends Dictionary{
         word += getTarget();
         if (!getWord_explain().equals(" ")) {
             index ++;
-            dictionaryUtilities.formatStringAndPrint(index, word, getWord_explain());
+            dictionaryUtilities.formatContent(index, word, getWord_explain());
         }
         if (dictionary.size() != 0) {
             for (Word w : dictionary) {
@@ -178,7 +178,7 @@ public class Word extends Dictionary{
 
         if (!getWord_explain().equals(" ")) {
             index += 1;
-            Words.add(dictionaryUtilities.formatStringAndReturn(index, word, getWord_explain()));
+            Words.add(dictionaryUtilities.formatContentAndReturn(index, word, getWord_explain()));
         }
 
         if (dictionary.size() != 0) {
@@ -188,6 +188,4 @@ public class Word extends Dictionary{
         }
         return index;
     }
-
-
 }

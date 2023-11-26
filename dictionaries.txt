@@ -4990,7 +4990,7 @@ withdraw	thu hồi
 withdrawal	thu hồi
 within	bên trong
 without	không có
-witness	nhân 
+witness	nhân
 wolf	chó sói
 woman	đàn bà
 wonder	ngạc nhiên

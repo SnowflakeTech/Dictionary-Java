@@ -7,7 +7,7 @@ public class DictionaryUI {
     Word toVietnamese = new Word(' ', " ");
 
     DictionaryUI() {
-        insertFromFile();
+        newInsertFromFile();
     }
 
     public String dictionaryLookup(String word, Word words) {
@@ -73,11 +73,11 @@ public class DictionaryUI {
         }
     }
 
-    void insertFromFile() {
+    public void newInsertFromFile() {
         insertFromFileUtils(toVietnamese, toEnglish);
     }
 
-    void dictionaryExportToFile() {
+    public void newDictionaryExportToFile() {
         dictionaryExportToFileUtils(toVietnamese);
     }
 }

@@ -82,7 +82,7 @@ public class DictionaryCommandline extends DictionaryManagement {
                             dictionarySearcher(prefix);
                             break;
                         case 7:
-                            // Implement game section
+
                             break;
                         case 8:
                             insertFromFile();
